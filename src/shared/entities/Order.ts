@@ -1,4 +1,5 @@
-import OrdersStatusEnum from "../enums/OrdersStatusEnum";
+import OrdersStatusEnum from "@enums/OrdersStatusEnum";
+
 import Attendant from "./Attendant";
 import Customer from "./Customer";
 import IEntity from "./interfaces/IEntity";

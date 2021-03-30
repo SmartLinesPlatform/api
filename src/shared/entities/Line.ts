@@ -1,4 +1,5 @@
-import LineTypesEnum from "../enums/LineTypesEnum";
+import LineTypesEnum from "@enums/LineTypesEnum";
+
 import IEntity from "./interfaces/IEntity";
 import Order from "./Order";
 

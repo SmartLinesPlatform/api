@@ -1,4 +1,5 @@
-import StoreTypesEnum from "../enums/StoreTypesEnum";
+import StoreTypesEnum from "@enums/StoreTypesEnum";
+
 import Admin from "./Admin";
 import Ads from "./Ads";
 import Attendant from "./Attendant";

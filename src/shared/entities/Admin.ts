@@ -1,4 +1,5 @@
-import AdminTypesEnum from "../enums/AdminTypesEnum";
+import AdminTypesEnum from "@enums/AdminTypesEnum";
+
 import IEntity from "./interfaces/IEntity";
 
 export default interface IAdmin extends IEntity {

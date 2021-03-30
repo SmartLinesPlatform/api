@@ -1,9 +1,10 @@
 import express from "express";
 
-const app = express();
-interface abc {
+import { port, env } from "./config/environment";
 
-}
-app.listen(3000, () => {
-  console.log('run')
+const app = express();
+
+app.listen(port, () => {
+  console.log(`Environment: ${env}`);
+  console.log(`Port: ${port}`);
 });

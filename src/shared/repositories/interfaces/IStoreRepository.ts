@@ -1,4 +1,3 @@
-import ILine from "@entities/Line";
 import Store from "@entities/Store";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 

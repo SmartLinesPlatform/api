@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import cors from "cors";
 import express from "express";
 
@@ -11,6 +12,11 @@ app.use(express.json());
 app.use(routes);
 
 app.listen(port, () => {
-  console.log(`Environment: ${env}`);
-  console.log(`Port: ${port}`);
+  if (env === "prod") {
+    console.log(chalk.green(`Environment: ${env}`));
+    console.log(chalk.green(`Port: ${port}`));
+  } else {
+    console.log(chalk.red(`Environment: ${env}`));
+    console.log(chalk.red(`Port: ${port}`));
+  }
 });

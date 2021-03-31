@@ -1,8 +1,10 @@
 import chalk from "chalk";
 import cors from "cors";
 import express from "express";
+import "express-async-errors";
 
 import { port, env } from "./config/environment";
+import GlobalErrorMiddleware from "./shared/middlewares/GlobalErrorMiddleware";
 import routes from "./shared/routes";
 
 const app = express();
@@ -10,6 +12,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+
+app.use(GlobalErrorMiddleware);
 
 app.listen(port, () => {
   if (env === "prod") {

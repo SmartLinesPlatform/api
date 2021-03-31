@@ -47,13 +47,6 @@ class StoreRepository implements IStoreRepository {
     );
     return stores;
   }
-
-  // async create({ name, age }: IUser): Promise<void> {
-  //   await this.repository.add({
-  //     name,
-  //     age,
-  //   });
-  // }
 }
 
 export default StoreRepository;

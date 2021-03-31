@@ -5,7 +5,7 @@ export default interface ICustomer extends IEntity {
   email: string;
   name: string;
   password: string;
-  favorites_categories: Category[];
+  favorites_categories: string[];
   is_in_line: boolean;
   coordinates: {
     lat: number;

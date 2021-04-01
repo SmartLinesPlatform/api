@@ -6,12 +6,19 @@ import ILineRepository, {
   IUpdateLineRequest,
 } from "./interfaces/ILineRepository";
 
-class StoreRepository implements ILineRepository {
+class LineRepository implements ILineRepository {
   private repository: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
 
   constructor() {
     this.repository = firebase.firestore().collection("lines");
   }
+
+  async findById(id: string): Promise<ILine> {
+    const lineData = await this.repository.doc(id).get();
+    const line = { ...lineData.data(), id: lineData.id } as ILine;
+    return line;
+  }
+
   async create({ store_id, orders, type }: ICreateLineRequest): Promise<ILine> {
     const lineRef = await this.repository.add({
       store_id,
@@ -24,40 +31,21 @@ class StoreRepository implements ILineRepository {
     const line = { ...lineData.data(), id: lineData.id } as ILine;
     return line;
   }
-  async update({
-    id,
-    orders,
-    type,
-    store_id,
-  }: IUpdateLineRequest): Promise<void> {
-    const fieldsToUpdate = {} as Omit<IUpdateLineRequest, "id">;
-
-    if (orders) {
-      fieldsToUpdate.orders = orders;
-    }
-
-    if (type) {
-      fieldsToUpdate.type = type;
-    }
-
-    if (store_id) {
-      fieldsToUpdate.store_id = store_id;
-    }
-
+  async update(id: string, data: IUpdateLineRequest): Promise<void> {
     const lineRef = this.repository.doc(id);
-    const updatedLine = await lineRef.update(fieldsToUpdate);
-    console.log(updatedLine);
+    await lineRef.update(data);
   }
-  async delete(): Promise<void> {
-    throw new Error("Method not implemented.");
+  async delete(id: string): Promise<void> {
+    const lineRef = this.repository.doc(id);
+    await lineRef.delete();
   }
   async listAll(): Promise<ILine[]> {
-    const dataLines = await this.repository.get();
-    const lines = dataLines.docs.map(
+    const linesData = await this.repository.get();
+    const lines = linesData.docs.map(
       (doc) => ({ ...doc.data(), id: doc.id } as ILine)
     );
     return lines;
   }
 }
 
-export default StoreRepository;
+export default LineRepository;

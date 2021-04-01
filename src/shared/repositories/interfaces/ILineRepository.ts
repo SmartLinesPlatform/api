@@ -8,7 +8,6 @@ export interface ICreateLineRequest {
 }
 
 export interface IUpdateLineRequest {
-  id: string;
   type?: LineTypesEnum;
   orders?: string[];
   store_id?: string;
@@ -16,7 +15,8 @@ export interface IUpdateLineRequest {
 
 export default interface ILineRepository {
   create(data: ICreateLineRequest): Promise<ILine>;
-  update(data: IUpdateLineRequest): Promise<void>;
-  delete(): Promise<void>;
+  update(id: string, data: IUpdateLineRequest): Promise<void>;
+  delete(id: string): Promise<void>;
   listAll(): Promise<ILine[]>;
+  findById(id: string): Promise<ILine>;
 }

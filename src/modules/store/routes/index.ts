@@ -1,11 +1,9 @@
 import { Router } from "express";
 
-import StoreController from "../controllers/StoreController";
+import storeRouter from "./store.routes";
 
 const router = Router();
-const storeController = new StoreController();
 
-router.get("/", storeController.index);
-router.post("/", storeController.create);
+router.use(storeRouter);
 
 export default router;

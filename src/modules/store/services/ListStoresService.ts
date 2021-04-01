@@ -1,15 +1,15 @@
 import Store from "@entities/Store";
-import Repository from "@repositories/interfaces/IStoreRepository";
+import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 
 class ListStoresService {
-  private repository: Repository;
+  private storeRepository: IStoreRepository;
 
-  constructor(repository: Repository) {
-    this.repository = repository;
+  constructor(storeRepository: IStoreRepository) {
+    this.storeRepository = storeRepository;
   }
 
   public async execute(): Promise<Store[]> {
-    const stores = await this.repository.listAll();
+    const stores = await this.storeRepository.listAll();
     return stores;
   }
 }

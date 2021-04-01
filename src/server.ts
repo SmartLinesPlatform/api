@@ -12,7 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-
 app.use(GlobalErrorMiddleware);
 
 app.listen(port, () => {

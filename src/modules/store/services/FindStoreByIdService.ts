@@ -2,11 +2,13 @@ import IStore from "@entities/interfaces/IStore";
 import AppError from "@errors/AppError";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
+import { injectable, inject, container } from "tsyringe";
 
+@injectable()
 class FindStoreByIdService implements IService<IStore, string> {
   private storeRepository: IStoreRepository;
 
-  constructor(storeRepository: IStoreRepository) {
+  constructor(@inject("StoreRepository") storeRepository: IStoreRepository) {
     this.storeRepository = storeRepository;
   }
 
@@ -21,4 +23,4 @@ class FindStoreByIdService implements IService<IStore, string> {
   }
 }
 
-export default FindStoreByIdService;
+export default container.resolve(FindStoreByIdService);

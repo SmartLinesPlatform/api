@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import "express-async-errors";
 import "@config/firebase";
+import "./shared/containers";
 
 import chalk from "chalk";
 import cors from "cors";

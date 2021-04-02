@@ -14,7 +14,8 @@
     "express-async-errors": "^3.1.1",
     "firebase-admin": "^9.5.0",
     "fireorm": "^0.20.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.5.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",

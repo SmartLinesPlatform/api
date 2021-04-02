@@ -2,17 +2,21 @@ import AppError from "@errors/AppError";
 import ILineRepository from "@repositories/interfaces/ILineRepository";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
+import { injectable, inject, container } from "tsyringe";
 
 interface IConstructor {
   storeRepository: IStoreRepository;
   lineRepository: ILineRepository;
 }
-
+@injectable()
 class DeleteStoreService implements IService<void, string> {
   private storeRepository: IStoreRepository;
   private lineRepository: ILineRepository;
 
-  constructor({ storeRepository, lineRepository }: IConstructor) {
+  constructor(
+    @inject("StoreRepository") storeRepository: IStoreRepository,
+    @inject("LineRepository") lineRepository: ILineRepository
+  ) {
     this.storeRepository = storeRepository;
     this.lineRepository = lineRepository;
   }
@@ -30,4 +34,4 @@ class DeleteStoreService implements IService<void, string> {
   }
 }
 
-export default DeleteStoreService;
+export default container.resolve(DeleteStoreService);

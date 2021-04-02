@@ -1,13 +1,15 @@
 import AppError from "@errors/AppError";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
+import { injectable, inject, container } from "tsyringe";
 
 import IUpdateStoreDTO from "../dtos/IUpdateStoreDTO";
 
+@injectable()
 class UpdateStoreService implements IService<void, IUpdateStoreDTO> {
   private storeRepository: IStoreRepository;
 
-  constructor(storeRepository: IStoreRepository) {
+  constructor(@inject("StoreRepository") storeRepository: IStoreRepository) {
     this.storeRepository = storeRepository;
   }
 
@@ -36,4 +38,4 @@ class UpdateStoreService implements IService<void, IUpdateStoreDTO> {
   }
 }
 
-export default UpdateStoreService;
+export default container.resolve(UpdateStoreService);

@@ -5,25 +5,21 @@ import ICategoryRepository from "@repositories/interfaces/ICategoryRepository";
 import ILineRepository from "@repositories/interfaces/ILineRepository";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
+import { injectable, inject, container } from "tsyringe";
 
 import ICreateStoreDTO from "../dtos/ICreateStoreDTO";
 
-interface IConstructor {
-  storeRepository: IStoreRepository;
-  lineRepository: ILineRepository;
-  categoryRepository: ICategoryRepository;
-}
-
+@injectable()
 class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
   private storeRepository: IStoreRepository;
   private lineRepository: ILineRepository;
   private categoryRepository: ICategoryRepository;
 
-  constructor({
-    storeRepository,
-    lineRepository,
-    categoryRepository,
-  }: IConstructor) {
+  constructor(
+    @inject("StoreRepository") storeRepository: IStoreRepository,
+    @inject("LineRepository") lineRepository: ILineRepository,
+    @inject("CategoryRepository") categoryRepository: ICategoryRepository
+  ) {
     this.storeRepository = storeRepository;
     this.lineRepository = lineRepository;
     this.categoryRepository = categoryRepository;
@@ -86,4 +82,4 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
   }
 }
 
-export default CreateStoreService;
+export default container.resolve(CreateStoreService);

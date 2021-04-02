@@ -1,18 +1,10 @@
-import StoreTypesEnum from "@enums/StoreTypesEnum";
 import AppError from "@errors/AppError";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
 
-interface IUpdateStoreServiceRequest {
-  id: string;
-  name: string;
-  cnpj: string;
-  lat: number;
-  lng: number;
-  type: StoreTypesEnum;
-}
+import IUpdateStoreDTO from "../dtos/IUpdateStoreDTO";
 
-class UpdateStoreService implements IService<void, IUpdateStoreServiceRequest> {
+class UpdateStoreService implements IService<void, IUpdateStoreDTO> {
   private storeRepository: IStoreRepository;
 
   constructor(storeRepository: IStoreRepository) {
@@ -26,7 +18,7 @@ class UpdateStoreService implements IService<void, IUpdateStoreServiceRequest> {
     lat,
     lng,
     type,
-  }: IUpdateStoreServiceRequest): Promise<void> {
+  }: IUpdateStoreDTO): Promise<void> {
     const store = await this.storeRepository.findById(id);
 
     if (!store) {

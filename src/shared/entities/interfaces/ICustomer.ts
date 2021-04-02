@@ -1,5 +1,3 @@
-import Category from "./ICategory";
-
 export default interface ICustomer {
   id: string;
   email: string;
@@ -11,7 +9,7 @@ export default interface ICustomer {
     lat: number;
     lng: number;
   };
-  profile_picture: string;
-  created_at: string;
-  updated_at: string;
+  profile_picture: string | null;
+  created_at: Date;
+  updated_at: Date;
 }

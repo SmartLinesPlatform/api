@@ -1,6 +1,7 @@
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 import AppError from "@errors/AppError";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
+import IService from "@utils/interfaces/IService";
 
 interface IUpdateStoreServiceRequest {
   id: string;
@@ -11,7 +12,7 @@ interface IUpdateStoreServiceRequest {
   type: StoreTypesEnum;
 }
 
-class UpdateStoreService {
+class UpdateStoreService implements IService<void, IUpdateStoreServiceRequest> {
   private storeRepository: IStoreRepository;
 
   constructor(storeRepository: IStoreRepository) {

@@ -1,10 +1,11 @@
-import Store from "@entities/interfaces/IStore";
+import IStore from "@entities/interfaces/IStore";
 import LineTypesEnum from "@enums/LineTypesEnum";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 import AppError from "@errors/AppError";
 import ICategoryRepository from "@repositories/interfaces/ICategoryRepository";
 import ILineRepository from "@repositories/interfaces/ILineRepository";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
+import IService from "@utils/interfaces/IService";
 
 interface ICreateStoreServiceRequest {
   name: string;
@@ -21,7 +22,8 @@ interface IConstructor {
   categoryRepository: ICategoryRepository;
 }
 
-class CreateStoreService {
+class CreateStoreService
+  implements IService<IStore, ICreateStoreServiceRequest> {
   private storeRepository: IStoreRepository;
   private lineRepository: ILineRepository;
   private categoryRepository: ICategoryRepository;
@@ -43,7 +45,7 @@ class CreateStoreService {
     lng,
     type,
     categories,
-  }: ICreateStoreServiceRequest): Promise<Store> {
+  }: ICreateStoreServiceRequest): Promise<IStore> {
     const category = await this.categoryRepository.findById(categories[0]);
     console.log(category);
 

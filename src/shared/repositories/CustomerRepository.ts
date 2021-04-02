@@ -14,6 +14,14 @@ class CustomerRepository implements ICustomerRepository {
     this.repository = getRepository(Customer);
   }
 
+  async findByEmail(email: string): Promise<ICustomer | null> {
+    const customer = await this.repository
+      .whereEqualTo((customer) => customer.email, email)
+      .findOne();
+
+    return customer;
+  }
+
   async findById(id: string): Promise<ICustomer | null> {
     const customer = await this.repository.findById(id);
     return customer;

@@ -1,5 +1,8 @@
+import { Collection } from "fireorm";
+
 import ICustomer from "./interfaces/ICustomer";
 
+@Collection()
 export default class Customer implements ICustomer {
   id: string;
   email: string;

@@ -19,4 +19,5 @@ export default interface ICustomerRepository {
   delete(id: string): Promise<void>;
   listAll(): Promise<ICustomer[]>;
   findById(id: string): Promise<ICustomer | null>;
+  findByEmail(email: string): Promise<ICustomer | null>;
 }

@@ -1,10 +1,6 @@
 import OrdersStatusEnum from "@enums/OrdersStatusEnum";
-import { Collection } from "fireorm";
 
-import IOrder from "./interfaces/IOrder";
-
-@Collection()
-export default class Order implements IOrder {
+export default interface IOrder {
   id: string;
   store_id: string;
   attendant_id: string;

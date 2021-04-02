@@ -26,16 +26,20 @@ class UpdateStoreService {
     lng,
     type,
   }: IUpdateStoreServiceRequest): Promise<void> {
-    const store = await this.storeRepository.update(id, {
+    const store = await this.storeRepository.findById(id);
+
+    if (!store) {
+      throw new AppError("Store not found", 404);
+    }
+
+    await this.storeRepository.update({
+      id,
       name,
       cnpj,
       lat,
       lng,
       type,
     });
-    if (!store) {
-      throw new AppError("Store not found", 404);
-    }
   }
 }
 

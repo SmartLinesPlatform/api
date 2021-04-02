@@ -1,7 +1,10 @@
+import "reflect-metadata";
+import "express-async-errors";
+import "@config/firebase";
+
 import chalk from "chalk";
 import cors from "cors";
 import express from "express";
-import "express-async-errors";
 
 import { port, env } from "./config/environment";
 import GlobalErrorMiddleware from "./shared/middlewares/GlobalErrorMiddleware";

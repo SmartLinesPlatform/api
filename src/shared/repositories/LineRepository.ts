@@ -1,49 +1,42 @@
-import ILine from "@entities/Line";
+import ILine from "@entities/interfaces/ILine";
+import Line from "@entities/Line";
+import { getRepository, IRepository } from "fireorm";
 
-import firebase from "../../config/firebase";
 import ILineRepository, {
   ICreateLineRequest,
   IUpdateLineRequest,
 } from "./interfaces/ILineRepository";
 
 class LineRepository implements ILineRepository {
-  private repository: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
+  private repository: IRepository<ILine>;
 
   constructor() {
-    this.repository = firebase.firestore().collection("lines");
+    this.repository = getRepository(Line);
   }
 
-  async findById(id: string): Promise<ILine> {
-    const lineData = await this.repository.doc(id).get();
-    const line = { ...lineData.data(), id: lineData.id } as ILine;
+  async findById(id: string): Promise<ILine | null> {
+    const line = await this.repository.findById(id);
     return line;
   }
 
   async create({ store_id, orders, type }: ICreateLineRequest): Promise<ILine> {
-    const lineRef = await this.repository.add({
+    const line = await this.repository.create({
       store_id,
       orders,
       type,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
-
-    const lineData = await lineRef.get();
-
-    const line = { ...lineData.data(), id: lineData.id } as ILine;
     return line;
   }
-  async update(id: string, data: IUpdateLineRequest): Promise<void> {
-    const lineRef = this.repository.doc(id);
-    await lineRef.update(data);
+  async update(data: IUpdateLineRequest): Promise<void> {
+    await this.repository.update(data);
   }
   async delete(id: string): Promise<void> {
-    const lineRef = this.repository.doc(id);
-    await lineRef.delete();
+    await this.repository.delete(id);
   }
   async listAll(): Promise<ILine[]> {
-    const linesData = await this.repository.get();
-    const lines = linesData.docs.map(
-      (doc) => ({ ...doc.data(), id: doc.id } as ILine)
-    );
+    const lines = await this.repository.find();
     return lines;
   }
 }

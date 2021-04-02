@@ -1,10 +1,6 @@
 import LineTypesEnum from "@enums/LineTypesEnum";
-import { Collection } from "fireorm";
 
-import ILine from "./interfaces/ILine";
-
-@Collection()
-export default class Line implements ILine {
+export default interface ILine {
   id: string;
   store_id: string;
   type: LineTypesEnum;

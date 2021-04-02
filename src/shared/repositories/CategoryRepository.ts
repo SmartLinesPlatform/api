@@ -1,76 +1,45 @@
-import ICategory from "@entities/Category";
+import Category from "@entities/Category";
+import ICategory from "@entities/interfaces/ICategory";
+import { getRepository, IRepository } from "fireorm";
 
-import firebase from "../../config/firebase";
 import ICategoryRepository, {
   ICreateCategoryRequest,
   IUpdateCategoryRequest,
 } from "./interfaces/ICategoryRepository";
 
 class CategoryRepository implements ICategoryRepository {
-  private repository: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
+  private repository: IRepository<ICategory>;
 
   constructor() {
-    this.repository = firebase.firestore().collection("categories");
+    this.repository = getRepository(Category);
   }
 
-  async findById(id: string): Promise<ICategory | undefined> {
-    const categoryData = await this.repository.doc(id).get();
-
-    if (!categoryData.exists) {
-      return undefined;
-    }
-
-    const category = {
-      ...categoryData.data(),
-      id: categoryData.id,
-    } as ICategory;
+  async findById(id: string): Promise<ICategory | null> {
+    const category = await this.repository.findById(id);
 
     return category;
   }
 
   async create({ name, type }: ICreateCategoryRequest): Promise<ICategory> {
-    const categoryRef = await this.repository.add({
+    const category = await this.repository.create({
       name,
       type,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
-
-    const categoryData = await categoryRef.get();
-
-    const category = {
-      ...categoryData.data(),
-      id: categoryData.id,
-    } as ICategory;
 
     return category;
   }
 
-  async update(id: string, data: IUpdateCategoryRequest): Promise<boolean> {
-    const categoryRef = this.repository.doc(id);
-
-    const categoryData = await categoryRef.get();
-
-    if (!categoryData.exists) {
-      return false;
-    }
-
-    await categoryRef.update(data);
-    return true;
+  async update(data: IUpdateCategoryRequest): Promise<void> {
+    await this.repository.update(data);
   }
-  async delete(id: string): Promise<boolean> {
-    const categoryRef = this.repository.doc(id);
-    const categoryData = await categoryRef.get();
 
-    if (!categoryData.exists) {
-      return false;
-    }
-    await categoryRef.delete();
-    return true;
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
   }
   async listAll(): Promise<ICategory[]> {
-    const categoriesData = await this.repository.get();
-    const categories = categoriesData.docs.map(
-      (doc) => ({ ...doc.data(), id: doc.id } as ICategory)
-    );
+    const categories = await this.repository.find();
     return categories;
   }
 }

@@ -1,4 +1,4 @@
-import IStore from "@entities/Store";
+import IStore from "@entities/interfaces/IStore";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 
 export interface ICreateStoreRequest {
@@ -12,6 +12,7 @@ export interface ICreateStoreRequest {
 }
 
 export interface IUpdateStoreRequest {
+  id: string;
   name?: string;
   cnpj?: string;
   lat?: number;
@@ -21,9 +22,9 @@ export interface IUpdateStoreRequest {
 
 export default interface IStoreRepository {
   create(data: ICreateStoreRequest): Promise<IStore>;
-  update(id: string, data: IUpdateStoreRequest): Promise<IStore | undefined>;
+  update(data: IUpdateStoreRequest): Promise<void>;
   delete(id: string): Promise<void>;
   listAll(): Promise<IStore[]>;
-  findById(id: string): Promise<IStore | undefined>;
-  findByCnpj(cnpj: string): Promise<IStore | undefined>;
+  findById(id: string): Promise<IStore | null>;
+  findByCnpj(cnpj: string): Promise<IStore | null>;
 }

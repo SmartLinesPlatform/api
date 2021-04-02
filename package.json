@@ -12,7 +12,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "firebase-admin": "^9.5.0"
+    "firebase-admin": "^9.5.0",
+    "fireorm": "^0.20.0",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",

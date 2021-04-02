@@ -1,4 +1,4 @@
-import Store from "@entities/Store";
+import Store from "@entities/interfaces/IStore";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 
 class ListStoresService {

@@ -1,10 +1,6 @@
 import StoreTypesEnum from "@enums/StoreTypesEnum";
-import { Collection } from "fireorm";
 
-import IStore from "./interfaces/IStore";
-
-@Collection()
-export default class Store implements IStore {
+export default interface IStore {
   id: string;
   name: string;
   categories: string[];
@@ -12,7 +8,10 @@ export default class Store implements IStore {
   cnpj: string;
   attendants: string[];
   admins: string[];
-  coordinates: { lat: number; lng: number };
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   ads: string[];
   type: StoreTypesEnum;
   created_at: Date;

@@ -1,13 +1,18 @@
 import admin, { ServiceAccount } from "firebase-admin";
+import * as fireorm from "fireorm";
 
 import { firebase_variables } from "./environment";
 
-const firebase = admin.initializeApp({
+admin.initializeApp({
   credential: admin.credential.cert(firebase_variables as ServiceAccount),
 });
 
-firebase.firestore().settings({
+admin.firestore().settings({
   ignoreUndefinedProperties: true,
 });
 
-export default firebase;
+const firestore = admin.firestore();
+
+fireorm.initialize(firestore);
+
+export default firestore;

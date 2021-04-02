@@ -1,43 +1,28 @@
-import chalk from "chalk";
+import IStore from "@entities/interfaces/IStore";
+import Store from "@entities/Store";
+import { getRepository, IRepository } from "fireorm";
 
-import firebase from "../../config/firebase";
-import IStore from "../entities/Store";
 import IStoreRepository, {
   ICreateStoreRequest,
   IUpdateStoreRequest,
 } from "./interfaces/IStoreRepository";
 
 class StoreRepository implements IStoreRepository {
-  private repository: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>;
+  private repository: IRepository<IStore>;
 
   constructor() {
-    this.repository = firebase.firestore().collection("stores");
+    this.repository = getRepository(Store);
   }
 
-  async findById(id: string): Promise<IStore | undefined> {
-    const storeData = await this.repository.doc(id).get();
-
-    if (storeData.exists) {
-      return undefined;
-    }
-
-    const store = { ...storeData.data(), id: storeData.id } as IStore;
+  async findById(id: string): Promise<IStore | null> {
+    const store = await this.repository.findById(id);
     return store;
   }
 
-  async findByCnpj(cnpj: string): Promise<IStore | undefined> {
-    const storesData = await this.repository.where("cnpj", "==", cnpj).get();
-
-    if (storesData.empty) {
-      return undefined;
-    }
-
-    const firstStore = storesData.docs[0];
-
-    const store = {
-      ...firstStore.data(),
-      id: firstStore.id,
-    } as IStore;
+  async findByCnpj(cnpj: string): Promise<IStore | null> {
+    const store = await this.repository
+      .whereEqualTo((store) => store.cnpj, cnpj)
+      .findOne();
 
     return store;
   }
@@ -51,49 +36,33 @@ class StoreRepository implements IStoreRepository {
     lines,
     categories,
   }: ICreateStoreRequest): Promise<IStore> {
-    const storeRef = await this.repository.add({
+    const store = await this.repository.create({
       name,
       cnpj,
       coordinates: { lat, lng },
       type,
       lines,
-      attendants: [],
+      categories,
       admins: [],
       ads: [],
-      categories,
+      attendants: [],
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
-    const storeData = await storeRef.get();
-
-    const store = { ...storeData.data(), id: storeData.id } as IStore;
     return store;
   }
 
-  async update(
-    id: string,
-    data: IUpdateStoreRequest
-  ): Promise<IStore | undefined> {
-    const storeRef = this.repository.doc(id);
-    const storeData = await storeRef.get();
-
-    if (storeData.exists) {
-      return undefined;
-    }
-
-    await storeRef.update(data);
-    return { ...storeData.data(), id: storeData.id } as IStore;
+  async update(data: IUpdateStoreRequest): Promise<void> {
+    await this.repository.update(data);
   }
 
   async delete(id: string): Promise<void> {
-    const storeRef = this.repository.doc(id);
-    await storeRef.delete();
+    await this.repository.delete(id);
   }
 
   async listAll(): Promise<IStore[]> {
-    const storesData = await this.repository.get();
-    const stores = storesData.docs.map(
-      (doc) => ({ ...doc.data(), id: doc.id } as IStore)
-    );
+    const stores = await this.repository.find();
     return stores;
   }
 }

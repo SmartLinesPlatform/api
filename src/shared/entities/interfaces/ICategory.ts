@@ -1,10 +1,6 @@
 import CategoryTypesEnum from "@enums/CategoryTypesEnum";
-import { Collection } from "fireorm";
 
-import ICategory from "./interfaces/ICategory";
-
-@Collection()
-export default class Category implements ICategory {
+export default interface ICategory {
   id: string;
   type: CategoryTypesEnum;
   name: string;

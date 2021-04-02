@@ -703,6 +703,11 @@ chokidar@^3.5.1:
   optionalDependencies:
     fsevents "~2.3.1"
 
+class-transformer@^0.2.0:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.2.3.tgz#598c92ca71dcca73f91ccb875d74a3847ccfa32d"
+  integrity sha512-qsP+0xoavpOlJHuYsQJsN58HXSl8Jvveo+T37rEvCEeRfMWoytAyR0Ua/YsFgpM6AZYZ/og2PJwArwzJl1aXtQ==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -1369,6 +1374,15 @@ firebase-admin@^9.5.0:
   optionalDependencies:
     "@google-cloud/firestore" "^4.5.0"
     "@google-cloud/storage" "^5.3.0"
+
+fireorm@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/fireorm/-/fireorm-0.20.0.tgz#58d896d812f60d77c3da0fbdae11809ac5a26aa5"
+  integrity sha512-aA0K98j4xpyyvXFA3SLu6GVQMUOAdXSzsffa1WQaW4ZKJ/mHHeYU/xJfjU8EKrMA5h5z5Q393kf9l6O9OwNRSw==
+  dependencies:
+    class-transformer "^0.2.0"
+    pluralize "^8.0.0"
+    ts-object-path "^0.1.2"
 
 flat-cache@^3.0.4:
   version "3.0.4"
@@ -2410,6 +2424,11 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+pluralize@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
+  integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -2563,6 +2582,11 @@ redent@^1.0.0:
   dependencies:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
+
+reflect-metadata@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 regexpp@^3.0.0, regexpp@^3.1.0:
   version "3.1.0"
@@ -2963,6 +2987,11 @@ ts-node@^9.0.0:
     make-error "^1.1.1"
     source-map-support "^0.5.17"
     yn "3.1.1"
+
+ts-object-path@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ts-object-path/-/ts-object-path-0.1.2.tgz#7bbfa50a9a3970bcdd7e67470d00fb54ca22a6c7"
+  integrity sha512-YLX9omkbe2spFv7DDo1fC5BiRfMtu/LgYuGSXnuIT5EkhedzCEShT7YrsQV3pjjT7doY2RHfoxJrra16KJlf7w==
 
 tsconfig-paths@^3.9.0:
   version "3.9.0"

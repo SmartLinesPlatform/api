@@ -1,4 +1,4 @@
-import Store from "@entities/Store";
+import Store from "@entities/interfaces/IStore";
 import LineTypesEnum from "@enums/LineTypesEnum";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 import AppError from "@errors/AppError";
@@ -45,6 +45,7 @@ class CreateStoreService {
     categories,
   }: ICreateStoreServiceRequest): Promise<Store> {
     const category = await this.categoryRepository.findById(categories[0]);
+    console.log(category);
 
     if (!category) {
       throw new AppError("Category not found", 404);
@@ -78,11 +79,13 @@ class CreateStoreService {
       categories: [category.id],
     });
 
-    await this.lineRepository.update(attendanceLine.id, {
+    await this.lineRepository.update({
+      id: attendanceLine.id,
       store_id: store.id,
     });
 
-    await this.lineRepository.update(withdrawLine.id, {
+    await this.lineRepository.update({
+      id: withdrawLine.id,
       store_id: store.id,
     });
 

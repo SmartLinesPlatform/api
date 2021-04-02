@@ -9,6 +9,6 @@ export default class Attendant implements IAttendant {
   email: string;
   password: string;
   store_id: string;
-  created_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
 }

@@ -12,7 +12,7 @@ export interface IUpdateCategoryRequest {
   name?: string;
 }
 
-export default interface ILineRepository {
+export default interface ICategoryRepository {
   create(data: ICreateCategoryRequest): Promise<ICategory>;
   update(data: IUpdateCategoryRequest): Promise<void>;
   delete(id: string): Promise<void>;

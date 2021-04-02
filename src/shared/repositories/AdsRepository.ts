@@ -15,9 +15,9 @@ class AdsRepository implements IAdsRepository {
   }
 
   async findById(id: string): Promise<IAds | null> {
-    const category = await this.repository.findById(id);
+    const ads = await this.repository.findById(id);
 
-    return category;
+    return ads;
   }
 
   async create({

@@ -4,10 +4,6 @@ import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
 import { injectable, inject, container } from "tsyringe";
 
-interface IConstructor {
-  storeRepository: IStoreRepository;
-  lineRepository: ILineRepository;
-}
 @injectable()
 class DeleteStoreService implements IService<void, string> {
   private storeRepository: IStoreRepository;

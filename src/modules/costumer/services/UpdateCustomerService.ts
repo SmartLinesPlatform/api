@@ -7,12 +7,12 @@ import IUpdateCustomerDTO from "../dtos/IUpdateCustomerDTO";
 
 @injectable()
 class UpdateCustomerService implements IService<void, IUpdateCustomerDTO> {
-  private storeRepository: ICustomerRepository;
+  private customerRepository: ICustomerRepository;
 
   constructor(
-    @inject("CustomerRepository") storeRepository: ICustomerRepository
+    @inject("CustomerRepository") customerRepository: ICustomerRepository
   ) {
-    this.storeRepository = storeRepository;
+    this.customerRepository = customerRepository;
   }
 
   public async execute({
@@ -21,13 +21,13 @@ class UpdateCustomerService implements IService<void, IUpdateCustomerDTO> {
     email,
     password,
   }: IUpdateCustomerDTO): Promise<void> {
-    const store = await this.storeRepository.findById(id);
+    const customer = await this.customerRepository.findById(id);
 
-    if (!store) {
+    if (!customer) {
       throw new AppError("Customer not found", 404);
     }
 
-    await this.storeRepository.update({
+    await this.customerRepository.update({
       id,
       name,
       email,

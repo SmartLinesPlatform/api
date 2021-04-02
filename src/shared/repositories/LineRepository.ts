@@ -19,10 +19,10 @@ class LineRepository implements ILineRepository {
     return line;
   }
 
-  async create({ store_id, orders, type }: ICreateLineRequest): Promise<ILine> {
+  async create({ store_id, type }: ICreateLineRequest): Promise<ILine> {
     const line = await this.repository.create({
       store_id,
-      orders,
+      orders: [],
       type,
       created_at: new Date(),
       updated_at: new Date(),

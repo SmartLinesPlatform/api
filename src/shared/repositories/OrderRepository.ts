@@ -16,9 +16,9 @@ class OrderRepository implements IOrderRepository {
   }
 
   async findById(id: string): Promise<IOrder | null> {
-    const category = await this.repository.findById(id);
+    const order = await this.repository.findById(id);
 
-    return category;
+    return order;
   }
 
   async create({
@@ -26,7 +26,7 @@ class OrderRepository implements IOrderRepository {
     store_id,
     customer_id,
   }: ICreateOrderRequest): Promise<IOrder> {
-    const category = await this.repository.create({
+    const order = await this.repository.create({
       attendant_id,
       store_id,
       customer_id,
@@ -36,7 +36,7 @@ class OrderRepository implements IOrderRepository {
       updated_at: new Date(),
     });
 
-    return category;
+    return order;
   }
 
   async update(data: IUpdateOrderRequest): Promise<void> {
@@ -47,8 +47,8 @@ class OrderRepository implements IOrderRepository {
     await this.repository.delete(id);
   }
   async listAll(): Promise<IOrder[]> {
-    const categories = await this.repository.find();
-    return categories;
+    const orders = await this.repository.find();
+    return orders;
   }
 }
 

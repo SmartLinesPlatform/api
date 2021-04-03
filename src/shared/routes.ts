@@ -1,3 +1,4 @@
+import categoryRoutes from "@modules/category/routes/category.routes";
 import customerRoutes from "@modules/costumer/routes";
 import lineRoutes from "@modules/line/routes/line.routes";
 import storeRouter from "@modules/store/routes";
@@ -8,5 +9,6 @@ const routes = Router();
 routes.use("/stores", storeRouter);
 routes.use("/customers", customerRoutes);
 routes.use("/lines", lineRoutes);
+routes.use("/categories", categoryRoutes);
 
 export default routes;

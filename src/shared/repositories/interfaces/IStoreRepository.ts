@@ -29,7 +29,7 @@ export default interface IStoreRepository {
   create(data: ICreateStoreRequest): Promise<IStore>;
   update(data: IUpdateStoreRequest): Promise<void>;
   delete(id: string): Promise<void>;
-  listAll(): Promise<IStore[]>;
+  listAll(data: string[]): Promise<IStore[]>;
   listPartnerStores(): Promise<IStore[]>;
   findById(id: string): Promise<IStore | null>;
   findByCnpj(cnpj: string): Promise<IStore | null>;

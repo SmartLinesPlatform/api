@@ -15,7 +15,11 @@ class StoreController implements IController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const stores = await ListStoresService.execute();
+    const { partners, restaurants } = req.query;
+    const stores = await ListStoresService.execute({
+      partners: Boolean(partners),
+      restaurants: Boolean(restaurants),
+    });
     return res.json(stores);
   }
 

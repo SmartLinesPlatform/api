@@ -82,8 +82,8 @@ class StoreRepository implements IStoreRepository {
     await this.repository.delete(id);
   }
 
-  async listAll(): Promise<IStore[]> {
-    const stores = await this.repository.find();
+  async listAll(data: string[]): Promise<IStore[]> {
+    const stores = await this.repository.whereIn("type", data).find();
     return stores;
   }
 }

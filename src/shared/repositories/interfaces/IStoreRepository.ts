@@ -20,6 +20,11 @@ export interface IUpdateStoreRequest {
   type?: StoreTypesEnum;
 }
 
+export interface IUpdateLineInStoreRequest {
+  id: string;
+  lines: string[];
+}
+
 export default interface IStoreRepository {
   create(data: ICreateStoreRequest): Promise<IStore>;
   update(data: IUpdateStoreRequest): Promise<void>;
@@ -27,4 +32,6 @@ export default interface IStoreRepository {
   listAll(): Promise<IStore[]>;
   findById(id: string): Promise<IStore | null>;
   findByCnpj(cnpj: string): Promise<IStore | null>;
+  insertLineInStore(store: IStore, line_id: string): Promise<void>;
+  removeLineFromStore(store: IStore, line_id: string): Promise<void>;
 }

@@ -4,6 +4,7 @@ import { getRepository, IRepository } from "fireorm";
 
 import IStoreRepository, {
   ICreateStoreRequest,
+  IUpdateLineInStoreRequest,
   IUpdateStoreRequest,
 } from "./interfaces/IStoreRepository";
 
@@ -12,6 +13,18 @@ class StoreRepository implements IStoreRepository {
 
   constructor() {
     this.repository = getRepository(Store);
+  }
+
+  async insertLineInStore(store: IStore, line_id: string): Promise<void> {
+    store.lines.push(line_id);
+    const updatedData = { ...store, updated_at: new Date() };
+    await this.repository.update(updatedData);
+  }
+
+  async removeLineFromStore(store: IStore, line_id: string): Promise<void> {
+    const lines = store.lines.filter((line) => line !== line_id);
+    const updatedData = { ...store, lines, updated_at: new Date() };
+    await this.repository.update(updatedData);
   }
 
   async findById(id: string): Promise<IStore | null> {
@@ -54,7 +67,7 @@ class StoreRepository implements IStoreRepository {
   }
 
   async update(data: IUpdateStoreRequest): Promise<void> {
-    const updatedData = { ...data, updated_at: new Date() }
+    const updatedData = { ...data, updated_at: new Date() };
     await this.repository.update(updatedData);
   }
 

@@ -24,8 +24,10 @@ class DeleteStoreService implements IService<void, string> {
       throw new AppError("Store not found", 404);
     }
 
-    await this.lineRepository.delete(store.lines[0]);
-    await this.lineRepository.delete(store.lines[1]);
+    store.lines.forEach(async (line) => {
+      await this.lineRepository.delete(line);
+    });
+
     await this.storeRepository.delete(store.id);
   }
 }

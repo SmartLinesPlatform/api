@@ -30,7 +30,7 @@ class LineRepository implements ILineRepository {
     return line;
   }
   async update(data: IUpdateLineRequest): Promise<void> {
-    const updatedData = { ...data, updated_at: new Date() }
+    const updatedData = { ...data, updated_at: new Date() };
     await this.repository.update(updatedData);
   }
   async delete(id: string): Promise<void> {

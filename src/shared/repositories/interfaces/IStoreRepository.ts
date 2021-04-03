@@ -30,6 +30,7 @@ export default interface IStoreRepository {
   update(data: IUpdateStoreRequest): Promise<void>;
   delete(id: string): Promise<void>;
   listAll(): Promise<IStore[]>;
+  listPartnerStores(): Promise<IStore[]>;
   findById(id: string): Promise<IStore | null>;
   findByCnpj(cnpj: string): Promise<IStore | null>;
   insertLineInStore(store: IStore, line_id: string): Promise<void>;

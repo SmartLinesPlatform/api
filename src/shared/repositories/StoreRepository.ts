@@ -1,5 +1,6 @@
 import IStore from "@entities/interfaces/IStore";
 import Store from "@entities/Store";
+import StoreTypesEnum from "@enums/StoreTypesEnum";
 import { getRepository, IRepository } from "fireorm";
 
 import IStoreRepository, {
@@ -12,6 +13,13 @@ class StoreRepository implements IStoreRepository {
 
   constructor() {
     this.repository = getRepository(Store);
+  }
+
+  async listPartnerStores(): Promise<IStore[]> {
+    const stores = await this.repository
+      .whereEqualTo("type", StoreTypesEnum.PARTNER)
+      .find();
+    return stores;
   }
 
   async insertLineInStore(store: IStore, line_id: string): Promise<void> {

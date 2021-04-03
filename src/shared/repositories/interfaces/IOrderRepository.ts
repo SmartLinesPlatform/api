@@ -3,7 +3,6 @@ import OrdersStatusEnum from "@enums/OrdersStatusEnum";
 
 export interface ICreateOrderRequest {
   store_id: string;
-  attendant_id: string;
   customer_id: string;
 }
 

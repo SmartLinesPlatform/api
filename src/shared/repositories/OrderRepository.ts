@@ -22,12 +22,11 @@ class OrderRepository implements IOrderRepository {
   }
 
   async create({
-    attendant_id,
     store_id,
     customer_id,
   }: ICreateOrderRequest): Promise<IOrder> {
     const order = await this.repository.create({
-      attendant_id,
+      attendant_id: null,
       store_id,
       customer_id,
       concluded_at: null,

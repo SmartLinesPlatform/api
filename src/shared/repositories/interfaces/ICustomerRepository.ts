@@ -11,6 +11,7 @@ export interface IUpdateCustomerRequest {
   name?: string;
   email?: string;
   password?: string;
+  is_in_line?: boolean;
 }
 
 export default interface ICustomerRepository {

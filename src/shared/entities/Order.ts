@@ -7,7 +7,7 @@ import IOrder from "./interfaces/IOrder";
 export default class Order implements IOrder {
   id: string;
   store_id: string;
-  attendant_id: string;
+  attendant_id: string | null;
   customer_id: string;
   status: OrdersStatusEnum;
   concluded_at: Date | null;

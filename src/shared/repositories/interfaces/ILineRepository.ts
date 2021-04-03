@@ -10,6 +10,7 @@ export interface IUpdateLineRequest {
   id: string;
   type?: LineTypesEnum;
   store_id?: string;
+  orders?: string[];
 }
 
 export default interface ILineRepository {

@@ -4,7 +4,6 @@ import { getRepository, IRepository } from "fireorm";
 
 import IStoreRepository, {
   ICreateStoreRequest,
-  IUpdateLineInStoreRequest,
   IUpdateStoreRequest,
 } from "./interfaces/IStoreRepository";
 

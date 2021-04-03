@@ -41,13 +41,11 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
     }
 
     const attendanceLine = await this.lineRepository.create({
-      orders: [],
       type: LineTypesEnum.ATTENDANCE_LINE,
       store_id: "",
     });
 
     const withdrawLine = await this.lineRepository.create({
-      orders: [],
       type: LineTypesEnum.WITHDRAW_LINE,
       store_id: "",
     });

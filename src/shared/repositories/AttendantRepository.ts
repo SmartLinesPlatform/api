@@ -39,7 +39,8 @@ class AttendantRepository implements IAttendantRepository {
   }
 
   async update(data: IUpdateAttendantRequest): Promise<void> {
-    await this.repository.update(data);
+    const updatedData = { ...data, updated_at: new Date() }
+    await this.repository.update(updatedData);
   }
 
   async delete(id: string): Promise<void> {

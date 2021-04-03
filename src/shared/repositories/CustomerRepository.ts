@@ -51,7 +51,8 @@ class CustomerRepository implements ICustomerRepository {
   }
 
   async update(data: IUpdateCustomerRequest): Promise<void> {
-    await this.repository.update(data);
+    const updatedData = { ...data, updated_at: new Date() }
+    await this.repository.update(updatedData);
   }
 
   async delete(id: string): Promise<void> {

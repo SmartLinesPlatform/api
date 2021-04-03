@@ -7,7 +7,7 @@ import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
 import { injectable, inject, container } from "tsyringe";
 
-import ICreateCustomerOrderDTO from "../dtos/ICreateCustomerOrderDTO";
+import ICreateCustomerOrderDTO from "../dtos/ICreateOrderDTO";
 
 @injectable()
 class CreateOrderService implements IService<IOrder, ICreateCustomerOrderDTO> {

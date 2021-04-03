@@ -1,9 +1,9 @@
 import IController from "@utils/interfaces/IController";
 import { Request, Response } from "express";
 
-import CreateCustomerOrderService from "../services/CreateCustomerOrderService";
+import CreateOrderService from "../services/CreateOrderService";
 
-class CustomerOrderController implements IController {
+class OrderController implements IController {
   async read(req: Request, res: Response): Promise<Response> {
     return res.json();
   }
@@ -14,7 +14,7 @@ class CustomerOrderController implements IController {
 
   async create(req: Request, res: Response): Promise<Response> {
     const { store_id, customer_id } = req.body;
-    const order = await CreateCustomerOrderService.execute({
+    const order = await CreateOrderService.execute({
       store_id,
       customer_id,
     });
@@ -30,4 +30,4 @@ class CustomerOrderController implements IController {
   }
 }
 
-export default CustomerOrderController;
+export default OrderController;

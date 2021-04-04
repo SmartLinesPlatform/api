@@ -32,7 +32,7 @@ class CategoryRepository implements ICategoryRepository {
   }
 
   async update(data: IUpdateCategoryRequest): Promise<void> {
-    const updatedData = { ...data, updated_at: new Date() }
+    const updatedData = { ...data, updated_at: new Date() };
     await this.repository.update(updatedData);
   }
 

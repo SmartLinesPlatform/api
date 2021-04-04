@@ -1,3 +1,5 @@
+import ICoordinates from "@utils/interfaces/ICoordinates";
+
 export default interface ICustomer {
   id: string;
   email: string;
@@ -5,10 +7,7 @@ export default interface ICustomer {
   password: string;
   favorites_categories: string[];
   is_in_line: boolean;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  coordinates: ICoordinates;
   profile_picture: string | null;
   created_at: Date;
   updated_at: Date;

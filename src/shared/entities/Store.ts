@@ -5,6 +5,7 @@ import IStore from "./interfaces/IStore";
 
 @Collection()
 export default class Store implements IStore {
+  picture_url: string | undefined;
   id: string;
   name: string;
   categories: string[];

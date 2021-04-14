@@ -18,6 +18,7 @@ export interface IUpdateStoreRequest {
   lat?: number;
   lng?: number;
   type?: StoreTypesEnum;
+  picture_url?: string;
 }
 
 export interface IUpdateLineInStoreRequest {

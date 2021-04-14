@@ -4,6 +4,7 @@ import ICoordinates from "@utils/interfaces/ICoordinates";
 export default interface IStore {
   id: string;
   name: string;
+  picture_url: string | undefined;
   categories: string[];
   lines: string[];
   cnpj: string;

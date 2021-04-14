@@ -58,6 +58,7 @@ class StoreRepository implements IStoreRepository {
   }: ICreateStoreRequest): Promise<IStore> {
     const store = await this.repository.create({
       name,
+      picture_url: "",
       cnpj,
       coordinates: { lat, lng },
       type,

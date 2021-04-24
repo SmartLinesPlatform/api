@@ -1,0 +1,595 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Smart Lines Documentation",
+    "Description": "This documentations shows the routes for the Smart Line API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "vhsouzaeng@gmail.com"
+    }
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Create category",
+        "description": "Create new category - TYPES: 'food' | 'sports' | 'beauty_and_care' | 'variety' | 'informatics' | 'stylish'",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Pizzas",
+                  "type": "food"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "List all categories",
+        "description": "List all categories in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/categories/{categoryID}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Category by id",
+        "description": "Show category by id",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Delete Category",
+        "description": "Delete Category",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Update Category",
+        "description": "Update Category - TYPES: 'food' | 'sports' | 'beauty_and_care' | 'variety' | 'informatics' | 'stylish'",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Pizzas",
+                  "type": "food"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Create customer",
+        "description": "Create new customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Vitor",
+                  "email": "vitor@gmail.com",
+                  "password": "123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Customer already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "List all customers",
+        "description": "List all customers in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/customers/{customerID}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Customer by id",
+        "description": "Show customer by id",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Delete Customer",
+        "description": "Delete Customer",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Update Customer",
+        "description": "Update Customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Vitor",
+                  "email": "vitor@gmail.com",
+                  "password": "123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      }
+    },
+    "/lines": {
+      "post": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "Create line",
+        "description": "Create new line - TYPES: 'attendance_line' | 'withdraw_line'",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "store_id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "store_id": "pOlouAWKmUC7Zu3673Du",
+                  "type": "withdraw_line"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Line already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "List all lines",
+        "description": "List all lines in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/lines/{lineID}": {
+      "get": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "Line by id",
+        "description": "Show line by id",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Line not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "Delete Line",
+        "description": "Delete Line",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Line not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "Update Line",
+        "description": "Update Line - TYPES: 'attendance_line' | 'withdraw_line'",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "store_id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "store_id": "pOlouAWKmUC7Zu3673Du",
+                  "type": "withdraw_line"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Line not found"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Crate order",
+        "description": "Create new order",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "store_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "customer_id": "QFWHveHW6ibPt1u93NT7",
+                  "store_id": "wFRGP8mfQDL0KALbeuej"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Customer is already in line"
+          },
+          "404": {
+            "description": "Customer or Store not found"
+          }
+        }
+      }
+    },
+    "/stores": {
+      "post": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Crate store",
+        "description": "Create new store - TYPES: 'restaurant' | 'partner' ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "cnpj": {
+                    "type": "string"
+                  },
+                  "lat": {
+                    "type": "number"
+                  },
+                  "lng": {
+                    "type": "number"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "categories": {
+                    "type": "array"
+                  }
+                },
+                "example": {
+                  "name": "Burger King",
+                  "cnpj": "123745",
+                  "lat": 0,
+                  "lng": 0,
+                  "type": "restaurant",
+                  "categories": [
+                    "5XyC6twd0u1wLV0zgDpP"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Store already exists"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "List all stores",
+        "description": "List all stores in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/stores?partners=true": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "List partner stores",
+        "description": "List partner stores in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/stores?restaurants=true": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "List restaurant stores",
+        "description": "List restaurant stores in the application",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/stores/{storeID}": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Store by id",
+        "description": "Show store by id",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Store not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Delete Store",
+        "description": "Delete Store",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Store not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Update Store",
+        "description": "Update Store - TYPES: 'restaurant' | 'partner' ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "cnpj": {
+                    "type": "string"
+                  },
+                  "lat": {
+                    "type": "number"
+                  },
+                  "lng": {
+                    "type": "number"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Burger King",
+                  "cnpj": "123745",
+                  "lat": 0,
+                  "lng": 0,
+                  "type": "restaurant"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Store not found"
+          }
+        }
+      }
+    }
+  }
+}

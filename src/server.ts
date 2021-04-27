@@ -8,7 +8,7 @@ import cors from "cors";
 import express from "express";
 import swaggerUI from "swagger-ui-express";
 
-import { port, env } from "./config/environment";
+import { env, host } from "./config/environment";
 import uploadConfig from "./config/upload";
 import GlobalErrorMiddleware from "./shared/middlewares/GlobalErrorMiddleware";
 import routes from "./shared/routes";
@@ -25,12 +25,12 @@ app.use("/files", express.static(uploadConfig.directory));
 app.use(routes);
 app.use(GlobalErrorMiddleware);
 
-app.listen(port, () => {
+app.listen(3000, () => {
   if (env === "prod") {
     console.log(chalk.green(`Environment: ${env}`));
-    console.log(chalk.green(`Port: ${port}`));
+    console.log(chalk.green(`URL: ${host}`));
   } else {
     console.log(chalk.red(`Environment: ${env}`));
-    console.log(chalk.red(`Port: ${port}`));
+    console.log(chalk.red(`URL: ${host}`));
   }
 });

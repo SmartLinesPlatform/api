@@ -18,9 +18,12 @@ class StorePictureController implements IController {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { storeId } = req.params;
+    const { file } = req;
+
     await UpdateStoreProfilePictureService.execute({
       id: storeId,
-      picture_url: req.file.filename,
+      filename: file.filename,
+      path: file.destination,
     });
     return res.json();
   }

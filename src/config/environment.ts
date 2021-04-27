@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const port = process.env.PORT || 3000;
+export const host = process.env.HOST || "localhost";
 export const env = process.env.NODE_ENV || "dev";
 export const firebase_variables = {
   type: process.env.SERVICE_ACCOUNT_TYPE || "",

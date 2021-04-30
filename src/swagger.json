@@ -27,11 +27,52 @@
                   },
                   "withdraw_line_id": {
                     "type": "string"
+                  },
+                  "attendant_id": {
+                    "type": "string"
                   }
                 },
                 "example": {
-                  "attendance_line_id": "PPBAOBXrTNzt5ayMrYVa",
-                  "withdraw_line_id": "F91SE7IOo8rFUBwfV1J0"
+                  "attendance_line_id": "id_line",
+                  "withdraw_line_id": "id_line",
+                  "attendant_id": "id_attendant"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Withdraw/Attendance line does not exists"
+          },
+          "404": {
+            "description": "The line is empty"
+          }
+        }
+      }
+    },
+    "/attendants/finish-attendment": {
+      "post": {
+        "tags": [
+          "Attendants"
+        ],
+        "summary": "Finish attendment",
+        "description": "Finish attendment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "store_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "store_id": "id_line"
                 }
               }
             }

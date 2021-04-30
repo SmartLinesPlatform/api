@@ -9,7 +9,7 @@ export interface ICreateOrderRequest {
 export interface IUpdateOrderRequest {
   id: string;
   store_id?: string;
-  attendant_id?: string;
+  attendant_id?: string | null;
   customer_id?: string;
   status?: OrdersStatusEnum;
 }

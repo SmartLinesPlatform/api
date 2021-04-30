@@ -1,9 +1,11 @@
 import { Router } from "express";
 
-import callCustomer from "./callCustomer.routes";
+import callCustomerRouter from "./callCustomer.routes";
+import finishAttendmentRouter from "./finishAttendment.routes";
 
 const router = Router();
 
-router.use(callCustomer);
+router.use(callCustomerRouter);
+router.use(finishAttendmentRouter);
 
 export default router;

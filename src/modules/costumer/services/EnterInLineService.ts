@@ -7,10 +7,10 @@ import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
 import { injectable, inject, container } from "tsyringe";
 
-import ICreateCustomerOrderDTO from "../dtos/ICreateOrderDTO";
+import IEnterInLineDTO from "../dtos/IEnterInLineDTO";
 
 @injectable()
-class CreateOrderService implements IService<IOrder, ICreateCustomerOrderDTO> {
+class EnterInLineService implements IService<IOrder, IEnterInLineDTO> {
   private orderRepository: IOrderRepository;
   private storeRepository: IStoreRepository;
   private lineRepository: ILineRepository;
@@ -35,7 +35,7 @@ class CreateOrderService implements IService<IOrder, ICreateCustomerOrderDTO> {
   public async execute({
     customer_id,
     store_id,
-  }: ICreateCustomerOrderDTO): Promise<IOrder> {
+  }: IEnterInLineDTO): Promise<IOrder> {
     const customer = await this.customerRepository.findById(customer_id);
 
     if (!customer) {
@@ -52,7 +52,7 @@ class CreateOrderService implements IService<IOrder, ICreateCustomerOrderDTO> {
       throw new AppError("Store does not exists", 400);
     }
 
-    const line = await this.lineRepository.findById(store.lines[0]);
+    const line = await this.lineRepository.findById(store.lines[1]);
 
     if (!line) {
       throw new AppError("Attendance line does not exists", 400);
@@ -74,4 +74,4 @@ class CreateOrderService implements IService<IOrder, ICreateCustomerOrderDTO> {
   }
 }
 
-export default container.resolve(CreateOrderService);
+export default container.resolve(EnterInLineService);

@@ -1,9 +1,6 @@
-import IOrder from "@entities/interfaces/IOrder";
 import AppError from "@errors/AppError";
-import ICustomerRepository from "@repositories/interfaces/ICustomerRepository";
 import ILineRepository from "@repositories/interfaces/ILineRepository";
 import IOrderRepository from "@repositories/interfaces/IOrderRepository";
-import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import IService from "@utils/interfaces/IService";
 import { injectable, inject, container } from "tsyringe";
 
@@ -12,17 +9,21 @@ import ICallNextCustomerDTO from "../dtos/ICallNextCustomerDTO";
 @injectable()
 class CallNextCustomerService implements IService<void, ICallNextCustomerDTO> {
   private lineRepository: ILineRepository;
-
+  private orderRepository: IOrderRepository;
   constructor(
     @inject("LineRepository")
-    lineRepository: ILineRepository
+    lineRepository: ILineRepository,
+    @inject("OrderRepository")
+    orderRepository: IOrderRepository
   ) {
     this.lineRepository = lineRepository;
+    this.orderRepository = orderRepository;
   }
 
   public async execute({
     attendance_line_id,
     withdraw_line_id,
+    attendant_id,
   }: ICallNextCustomerDTO): Promise<void> {
     const attendanceLine = await this.lineRepository.findById(
       attendance_line_id
@@ -38,16 +39,24 @@ class CallNextCustomerService implements IService<void, ICallNextCustomerDTO> {
       throw new AppError("Withdraw line does not exists", 400);
     }
 
-    const firstOrder = attendanceLine.orders.shift();
+    const order_id = attendanceLine.orders.shift();
 
-    if (!firstOrder) {
+    if (!order_id) {
       throw new AppError("The line is empty", 404);
     }
 
-    withdrawLine.orders.push(firstOrder);
+    const order = await this.orderRepository.findById(order_id);
+
+    if (!order) {
+      throw new AppError("Order not found", 404);
+    }
+
+    order.attendant_id = attendant_id;
+    withdrawLine.orders.push(order.id);
 
     await this.lineRepository.update(attendanceLine);
     await this.lineRepository.update(withdrawLine);
+    await this.orderRepository.update(order);
   }
 }
 

@@ -9,11 +9,12 @@ class CallCustomerController implements IController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const { attendance_line_id, withdraw_line_id } = req.body;
+    const { attendance_line_id, withdraw_line_id, attendant_id } = req.body;
 
     await CallNextCustomerService.execute({
       attendance_line_id,
       withdraw_line_id,
+      attendant_id,
     });
 
     return res.json();

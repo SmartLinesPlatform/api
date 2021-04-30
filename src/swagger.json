@@ -294,6 +294,47 @@
         }
       }
     },
+    "/customers/enter-in-line": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Customer enter in line",
+        "description": "Customer enter in line",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "store_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "customer_id": "QFWHveHW6ibPt1u93NT7",
+                  "store_id": "wFRGP8mfQDL0KALbeuej"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Customer is already in line"
+          },
+          "404": {
+            "description": "Customer or Store not found"
+          }
+        }
+      }
+    },
     "/lines": {
       "post": {
         "tags": [
@@ -408,47 +449,6 @@
           },
           "404": {
             "description": "Line not found"
-          }
-        }
-      }
-    },
-    "/orders": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Crate order",
-        "description": "Create new order",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "customer_id": {
-                    "type": "string"
-                  },
-                  "store_id": {
-                    "type": "string"
-                  }
-                },
-                "example": {
-                  "customer_id": "QFWHveHW6ibPt1u93NT7",
-                  "store_id": "wFRGP8mfQDL0KALbeuej"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Customer is already in line"
-          },
-          "404": {
-            "description": "Customer or Store not found"
           }
         }
       }

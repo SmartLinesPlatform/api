@@ -9,6 +9,47 @@
     }
   },
   "paths": {
+    "/attendants/call-next-customer": {
+      "post": {
+        "tags": [
+          "Attendants"
+        ],
+        "summary": "Call next customer",
+        "description": "Call next customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "attendance_line_id": {
+                    "type": "string"
+                  },
+                  "withdraw_line_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "attendance_line_id": "PPBAOBXrTNzt5ayMrYVa",
+                  "withdraw_line_id": "F91SE7IOo8rFUBwfV1J0"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Withdraw/Attendance line does not exists"
+          },
+          "404": {
+            "description": "The line is empty"
+          }
+        }
+      }
+    },
     "/categories": {
       "post": {
         "tags": [

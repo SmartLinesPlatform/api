@@ -1,25 +1,26 @@
 import IController from "@utils/interfaces/IController";
 import { Request, Response } from "express";
 
-import FinishAttendmentService from "../services/FinishAttendmentService";
+import CreateAttendantService from "../services/CreateAttendantService";
 
-class FinishAttendmentController implements IController {
+class AttendantController implements IController {
   async read(req: Request, res: Response): Promise<Response> {
     return res.json();
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const { store_id } = req.body;
-
-    await FinishAttendmentService.execute({
-      store_id,
-    });
-
     return res.json();
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    return res.json();
+    const { name, email, password, store_id } = req.body;
+    const attendant = await CreateAttendantService.execute({
+      name,
+      email,
+      password,
+      store_id
+    });
+    return res.json(attendant);
   }
 
   async update(req: Request, res: Response): Promise<Response> {
@@ -31,4 +32,4 @@ class FinishAttendmentController implements IController {
   }
 }
 
-export default FinishAttendmentController;
+export default AttendantController;

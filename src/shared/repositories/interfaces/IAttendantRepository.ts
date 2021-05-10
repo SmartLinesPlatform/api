@@ -21,4 +21,5 @@ export default interface IAttendantRepository {
   delete(id: string): Promise<void>;
   listAll(): Promise<IAttendant[]>;
   findById(id: string): Promise<IAttendant | null>;
+  findByEmail(email: string): Promise<IAttendant | null>;
 }

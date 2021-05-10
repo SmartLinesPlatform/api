@@ -13,6 +13,13 @@ class AttendantRepository implements IAttendantRepository {
   constructor() {
     this.repository = getRepository(Attendant);
   }
+  async findByEmail(email: string): Promise<Attendant | null> {
+    const attendant = await this.repository
+      .whereEqualTo((attendant) => attendant.email, email)
+      .findOne();
+
+    return attendant;
+  }
 
   async findById(id: string): Promise<IAttendant | null> {
     const attendant = await this.repository.findById(id);

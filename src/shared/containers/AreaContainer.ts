@@ -1,8 +1,8 @@
-import AreaRepository from "@repositories/AreaRepository";
-import IAreaRepository from "@repositories/interfaces/IAreaRepository";
+import AttendantRepository from "@repositories/AttendantRepository";
+import IAttendantRepository from "@repositories/interfaces/IAttendantRepository";
 import { container } from "tsyringe";
 
-container.registerSingleton<IAreaRepository>(
-  "AreaRepository",
-  AreaRepository
+container.registerSingleton<IAttendantRepository>(
+  "AttendantRepository",
+  AttendantRepository
 );

@@ -1,4 +1,5 @@
 import IController from "@utils/interfaces/IController";
+import ICoordinates from "@utils/interfaces/ICoordinates";
 import { Request, Response } from "express";
 
 import CreateStoreService from "../services/CreateStoreService";
@@ -15,17 +16,22 @@ class StoreController implements IController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    const { partners, restaurants } = req.query;
+    const { partners, restaurants, lat, lng } = req.query;
     const stores = await ListStoresService.execute({
       partners: Boolean(partners),
       restaurants: Boolean(restaurants),
+      current_position: {
+        lat: Number(lat),
+        lng: Number(lng)
+      }
     });
     return res.json(stores);
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    const { name, cnpj, lat, lng, type, categories } = req.body;
+    const { area_id, name, cnpj, lat, lng, type, categories } = req.body;
     const store = await CreateStoreService.execute({
+      area_id,
       name,
       cnpj,
       lat,

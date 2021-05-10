@@ -1,6 +1,7 @@
 import IStore from "@entities/interfaces/IStore";
 import LineTypesEnum from "@enums/LineTypesEnum";
 import AppError from "@errors/AppError";
+import IAreaRepository from "@repositories/interfaces/IAreaRepository";
 import ICategoryRepository from "@repositories/interfaces/ICategoryRepository";
 import ILineRepository from "@repositories/interfaces/ILineRepository";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
@@ -14,18 +15,23 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
   private storeRepository: IStoreRepository;
   private lineRepository: ILineRepository;
   private categoryRepository: ICategoryRepository;
+  private areaRepository: IAreaRepository;
 
   constructor(
     @inject("StoreRepository") storeRepository: IStoreRepository,
     @inject("LineRepository") lineRepository: ILineRepository,
-    @inject("CategoryRepository") categoryRepository: ICategoryRepository
+    @inject("CategoryRepository") categoryRepository: ICategoryRepository,
+    @inject("AreaRepository") areaRepository: IAreaRepository
+
   ) {
     this.storeRepository = storeRepository;
     this.lineRepository = lineRepository;
     this.categoryRepository = categoryRepository;
+    this.areaRepository = areaRepository;
   }
 
   public async execute({
+    area_id,
     name,
     cnpj,
     lat,
@@ -33,8 +39,13 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
     type,
     categories,
   }: ICreateStoreDTO): Promise<IStore> {
+    const area = await this.areaRepository.findById(area_id);
+
+    if (!area) {
+      throw new AppError("Area not found", 404);
+    }
+
     const category = await this.categoryRepository.findById(categories[0]);
-    console.log(category);
 
     if (!category) {
       throw new AppError("Category not found", 404);
@@ -57,6 +68,7 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
     }
 
     const store = await this.storeRepository.create({
+      area_id,
       name,
       cnpj,
       lat,

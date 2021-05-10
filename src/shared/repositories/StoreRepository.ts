@@ -5,6 +5,7 @@ import { getRepository, IRepository } from "fireorm";
 
 import IStoreRepository, {
   ICreateStoreRequest,
+  IListAllStoresRequest,
   IUpdateStoreRequest,
 } from "./interfaces/IStoreRepository";
 
@@ -48,6 +49,7 @@ class StoreRepository implements IStoreRepository {
   }
 
   async create({
+    area_id,
     name,
     cnpj,
     lat,
@@ -57,6 +59,7 @@ class StoreRepository implements IStoreRepository {
     categories,
   }: ICreateStoreRequest): Promise<IStore> {
     const store = await this.repository.create({
+      area_id,
       name,
       picture_url: "",
       cnpj,
@@ -83,8 +86,8 @@ class StoreRepository implements IStoreRepository {
     await this.repository.delete(id);
   }
 
-  async listAll(data: string[]): Promise<IStore[]> {
-    const stores = await this.repository.whereIn("type", data).find();
+  async listAll({ types, area_id }: IListAllStoresRequest): Promise<IStore[]> {
+    const stores = await this.repository.whereIn("type", types).whereEqualTo("area_id", area_id).find();
     return stores;
   }
 }

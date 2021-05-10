@@ -7,6 +7,7 @@ import IStore from "./interfaces/IStore";
 export default class Store implements IStore {
   picture_url: string | undefined;
   id: string;
+  area_id: string;
   name: string;
   categories: string[];
   lines: string[];

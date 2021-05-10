@@ -7,7 +7,10 @@ export default interface IStore {
   name: string;
   picture_url: string | undefined;
   categories: string[];
-  lines: string[];
+  lines: {
+    attendance_line_id: string;
+    withdraw_line_id: string;
+  };
   cnpj: string;
   attendants: string[];
   admins: string[];

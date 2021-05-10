@@ -74,7 +74,10 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
       lat,
       lng,
       type,
-      lines: [withdrawLine.id, attendanceLine.id],
+      lines: {
+        attendance_line_id: attendanceLine.id,
+        withdraw_line_id: withdrawLine.id
+      },
       categories: [category.id],
     });
 

@@ -23,18 +23,6 @@ class StoreRepository implements IStoreRepository {
     return stores;
   }
 
-  async insertLineInStore(store: IStore, line_id: string): Promise<void> {
-    store.lines.push(line_id);
-    const updatedData = { ...store, updated_at: new Date() };
-    await this.repository.update(updatedData);
-  }
-
-  async removeLineFromStore(store: IStore, line_id: string): Promise<void> {
-    const lines = store.lines.filter((line) => line !== line_id);
-    const updatedData = { ...store, lines, updated_at: new Date() };
-    await this.repository.update(updatedData);
-  }
-
   async findById(id: string): Promise<IStore | null> {
     const store = await this.repository.findById(id);
     return store;

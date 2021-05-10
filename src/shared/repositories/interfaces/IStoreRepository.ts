@@ -8,7 +8,10 @@ export interface ICreateStoreRequest {
   lat: number;
   lng: number;
   type: StoreTypesEnum;
-  lines: string[];
+  lines: {
+    attendance_line_id: string;
+    withdraw_line_id: string;
+  };
   categories: string[];
 }
 
@@ -40,6 +43,4 @@ export default interface IStoreRepository {
   listPartnerStores(): Promise<IStore[]>;
   findById(id: string): Promise<IStore | null>;
   findByCnpj(cnpj: string): Promise<IStore | null>;
-  insertLineInStore(store: IStore, line_id: string): Promise<void>;
-  removeLineFromStore(store: IStore, line_id: string): Promise<void>;
 }

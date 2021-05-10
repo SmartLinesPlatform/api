@@ -10,7 +10,10 @@ export default class Store implements IStore {
   area_id: string;
   name: string;
   categories: string[];
-  lines: string[];
+  lines: {
+    attendance_line_id: string;
+    withdraw_line_id: string;
+  };
   cnpj: string;
   attendants: string[];
   admins: string[];

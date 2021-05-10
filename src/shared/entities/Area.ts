@@ -8,4 +8,6 @@ export default class Area implements IArea {
   id: string;
   name: string;
   bounds: ICoordinates[];
+  created_at: Date;
+  updated_at: Date;
 }

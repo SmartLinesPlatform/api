@@ -3,3 +3,4 @@ import "./CategoryContainer";
 import "./LineContainer";
 import "./CustomerContainer";
 import "./OrderContainer";
+import "./AreaContainer";

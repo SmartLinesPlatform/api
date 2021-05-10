@@ -41,7 +41,7 @@ class AdsRepository implements IAdsRepository {
   }
 
   async update(data: IUpdateAdsRequest): Promise<void> {
-    const updatedData = { ...data, updated_at: new Date() }
+    const updatedData = { ...data, updated_at: new Date() };
     await this.repository.update(updatedData);
   }
 

@@ -30,20 +30,14 @@ class CallNextCustomerService implements IService<void, ICallNextCustomerDTO> {
     this.storeRepository = storeRepository;
   }
 
-  public async execute({
-    attendant_id,
-  }: ICallNextCustomerDTO): Promise<void> {
-    const attendant = await this.attendantRepository.findById(
-      attendant_id
-    );
+  public async execute({ attendant_id }: ICallNextCustomerDTO): Promise<void> {
+    const attendant = await this.attendantRepository.findById(attendant_id);
 
     if (!attendant) {
       throw new AppError("Attendant does not exists", 400);
     }
 
-    const store = await this.storeRepository.findById(
-      attendant.store_id
-    );
+    const store = await this.storeRepository.findById(attendant.store_id);
 
     if (!store) {
       throw new AppError("Store does not exists", 400);

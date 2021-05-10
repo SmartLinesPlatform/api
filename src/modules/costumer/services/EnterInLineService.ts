@@ -52,7 +52,9 @@ class EnterInLineService implements IService<IOrder, IEnterInLineDTO> {
       throw new AppError("Store does not exists", 400);
     }
 
-    const line = await this.lineRepository.findById(store.lines.attendance_line_id);
+    const line = await this.lineRepository.findById(
+      store.lines.attendance_line_id
+    );
 
     if (!line) {
       throw new AppError("Attendance line does not exists", 400);

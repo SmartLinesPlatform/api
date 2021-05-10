@@ -2,6 +2,7 @@ import { isInsidePolygon } from "@utils/helpers/Location";
 import IController from "@utils/interfaces/IController";
 import ICoordinates from "@utils/interfaces/ICoordinates";
 import { Request, Response } from "express";
+
 import CreateAreaService from "../services/CreateAreaService";
 
 class AreaController implements IController {
@@ -14,7 +15,7 @@ class AreaController implements IController {
 
     const point: ICoordinates = {
       lat: Number(lat),
-      lng: Number(lng)
+      lng: Number(lng),
     };
 
     const isInside = isInsidePolygon(point, polygon);
@@ -25,7 +26,7 @@ class AreaController implements IController {
     const { bounds, name } = req.body;
     const area = await CreateAreaService.execute({
       name,
-      bounds
+      bounds,
     });
     return res.json(area);
   }

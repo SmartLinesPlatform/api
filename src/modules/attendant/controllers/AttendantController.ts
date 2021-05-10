@@ -18,7 +18,7 @@ class AttendantController implements IController {
       name,
       email,
       password,
-      store_id
+      store_id,
     });
     return res.json(attendant);
   }

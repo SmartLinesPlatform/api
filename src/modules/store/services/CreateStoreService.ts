@@ -22,7 +22,6 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
     @inject("LineRepository") lineRepository: ILineRepository,
     @inject("CategoryRepository") categoryRepository: ICategoryRepository,
     @inject("AreaRepository") areaRepository: IAreaRepository
-
   ) {
     this.storeRepository = storeRepository;
     this.lineRepository = lineRepository;
@@ -76,7 +75,7 @@ class CreateStoreService implements IService<IStore, ICreateStoreDTO> {
       type,
       lines: {
         attendance_line_id: attendanceLine.id,
-        withdraw_line_id: withdrawLine.id
+        withdraw_line_id: withdrawLine.id,
       },
       categories: [category.id],
     });

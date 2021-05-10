@@ -1,4 +1,3 @@
-import Area from "@entities/Area";
 import IStore from "@entities/interfaces/IStore";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
 import AppError from "@errors/AppError";
@@ -15,25 +14,25 @@ class ListStoresService implements IService<IStore[], IListStoresDTO> {
   private storeRepository: IStoreRepository;
   private areaRepository: IAreaRepository;
 
-  constructor(@inject("StoreRepository") storeRepository: IStoreRepository, @inject("AreaRepository") areaRepository: IAreaRepository) {
+  constructor(
+    @inject("StoreRepository") storeRepository: IStoreRepository,
+    @inject("AreaRepository") areaRepository: IAreaRepository
+  ) {
     this.storeRepository = storeRepository;
     this.areaRepository = areaRepository;
   }
-  async execute({ partners, restaurants, current_position }: IListStoresDTO): Promise<IStore[]> {
+  async execute({
+    partners,
+    restaurants,
+    current_position,
+  }: IListStoresDTO): Promise<IStore[]> {
     const types: string[] = [];
 
     const areas = await this.areaRepository.listAll();
 
-    let area: Area | null = null;
-
-    for (const item of areas) {
-      const isInside = isInsidePolygon(current_position, item.bounds);
-
-      if (isInside) {
-        area = item;
-        break;
-      }
-    }
+    const area = areas.find((area) =>
+      isInsidePolygon(current_position, area.bounds)
+    );
 
     if (!area) {
       console.log(area);
@@ -53,7 +52,10 @@ class ListStoresService implements IService<IStore[], IListStoresDTO> {
       types.push(StoreTypesEnum.RESTAURANT);
     }
 
-    const stores = await this.storeRepository.listAll({ types, area_id: area.id });
+    const stores = await this.storeRepository.listAll({
+      types,
+      area_id: area.id,
+    });
     return stores;
   }
 }

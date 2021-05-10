@@ -1,8 +1,6 @@
 import IController from "@utils/interfaces/IController";
 import { Request, Response } from "express";
 
-import CreateLineService from "../services/CreateLineService";
-import DeleteLineService from "../services/DeleteLineService";
 import FindLineByIdService from "../services/FindLineByIdService";
 import ListLinesService from "../services/ListLinesService";
 import UpdateLineService from "../services/UpdateLineService";
@@ -20,12 +18,7 @@ class LineController implements IController {
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    const { store_id, type } = req.body;
-    const line = await CreateLineService.execute({
-      store_id,
-      type,
-    });
-    return res.json(line);
+    return res.json();
   }
 
   async update(req: Request, res: Response): Promise<Response> {
@@ -41,8 +34,6 @@ class LineController implements IController {
   }
 
   async delete(req: Request, res: Response): Promise<Response> {
-    const { lineId } = req.params;
-    await DeleteLineService.execute(lineId);
     return res.json();
   }
 }

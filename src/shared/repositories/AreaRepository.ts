@@ -1,7 +1,11 @@
 import Area from "@entities/Area";
 import IArea from "@entities/interfaces/IArea";
 import { getRepository, IRepository } from "fireorm";
-import IAreaRepository, { ICreateAreaRequest, IUpdateAreaRequest } from "./interfaces/IAreaRepository";
+
+import IAreaRepository, {
+  ICreateAreaRequest,
+  IUpdateAreaRequest,
+} from "./interfaces/IAreaRepository";
 
 class AreaRepository implements IAreaRepository {
   private repository: IRepository<IArea>;

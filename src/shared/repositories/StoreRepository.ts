@@ -75,7 +75,10 @@ class StoreRepository implements IStoreRepository {
   }
 
   async listAll({ types, area_id }: IListAllStoresRequest): Promise<IStore[]> {
-    const stores = await this.repository.whereIn("type", types).whereEqualTo("area_id", area_id).find();
+    const stores = await this.repository
+      .whereIn("type", types)
+      .whereEqualTo("area_id", area_id)
+      .find();
     return stores;
   }
 }

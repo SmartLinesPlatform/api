@@ -14,6 +14,13 @@ class OrderRepository implements IOrderRepository {
   constructor() {
     this.repository = getRepository(Order);
   }
+  async findByCustomerId(id: string): Promise<Order | null> {
+    const Order = await this.repository
+      .whereEqualTo("customer_id", id)
+      .whereEqualTo("status", OrdersStatusEnum.IN_PROGRESS)
+      .findOne();
+    return Order;
+  }
 
   async findById(id: string): Promise<IOrder | null> {
     const order = await this.repository.findById(id);

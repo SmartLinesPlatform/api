@@ -20,4 +20,5 @@ export default interface IOrderRepository {
   delete(id: string): Promise<void>;
   listAll(): Promise<IOrder[]>;
   findById(id: string): Promise<IOrder | null>;
+  findByCustomerId(id: string): Promise<IOrder | null>;
 }

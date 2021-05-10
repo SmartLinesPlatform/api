@@ -19,4 +19,5 @@ export default interface ILineRepository {
   delete(id: string): Promise<void>;
   listAll(): Promise<ILine[]>;
   findById(id: string): Promise<ILine | null>;
+  findLineByOrderInside(id: string): Promise<ILine | null>;
 }

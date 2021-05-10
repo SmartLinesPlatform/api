@@ -13,6 +13,12 @@ class LineRepository implements ILineRepository {
   constructor() {
     this.repository = getRepository(Line);
   }
+  async findLineByOrderInside(id: string): Promise<Line | null> {
+    const line = await this.repository
+      .whereArrayContains("orders", id)
+      .findOne();
+    return line;
+  }
 
   async findById(id: string): Promise<ILine | null> {
     const line = await this.repository.findById(id);

@@ -31,8 +31,8 @@ export interface IUpdateLineInStoreRequest {
 }
 
 export interface IListAllStoresRequest {
-  types: string[],
-  area_id: string
+  types: string[];
+  area_id: string;
 }
 
 export default interface IStoreRepository {

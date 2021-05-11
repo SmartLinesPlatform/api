@@ -1,4 +1,3 @@
-import ICustomer from "@entities/interfaces/ICustomer";
 import AppError from "@errors/AppError";
 import ICustomerRepository from "@repositories/interfaces/ICustomerRepository";
 import ILineRepository from "@repositories/interfaces/ILineRepository";

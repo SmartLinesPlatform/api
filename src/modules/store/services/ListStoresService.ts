@@ -1,6 +1,5 @@
 import IStore from "@entities/interfaces/IStore";
 import StoreTypesEnum from "@enums/StoreTypesEnum";
-import AppError from "@errors/AppError";
 import IAreaRepository from "@repositories/interfaces/IAreaRepository";
 import IStoreRepository from "@repositories/interfaces/IStoreRepository";
 import { isInsidePolygon } from "@utils/helpers/Location";

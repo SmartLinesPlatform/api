@@ -21,18 +21,20 @@ class AdsRepository implements IAdsRepository {
   }
 
   async create({
+    author_id,
+    banner_url,
+    description,
+    isActive,
     store_id,
-    open_date,
-    close_date,
-    thumbnail_url,
-    post,
+    title,
   }: ICreateAdsRequest): Promise<IAds> {
     const ads = await this.repository.create({
       store_id,
-      open_date,
-      close_date,
-      thumbnail_url,
-      post,
+      author_id,
+      banner_url,
+      description,
+      isActive,
+      title,
       created_at: new Date(),
       updated_at: new Date(),
     });

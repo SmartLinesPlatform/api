@@ -1,15 +1,12 @@
 import IAds from "@entities/Ads";
 
 export interface ICreateAdsRequest {
+  title: string;
+  description: string;
+  author_id: string;
+  banner_url: string;
   store_id: string;
-  open_date: Date;
-  close_date: Date;
-  thumbnail_url: string;
-  post: {
-    image: string;
-    title: string;
-    description: string;
-  };
+  isActive: boolean;
 }
 
 export interface IUpdateAdsRequest {

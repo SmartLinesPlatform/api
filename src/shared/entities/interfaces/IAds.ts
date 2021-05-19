@@ -1,14 +1,11 @@
 export default interface IAds {
   id: string;
-  open_date: Date;
-  close_date: Date;
-  thumbnail_url: string;
+  title: string;
+  banner_url: string;
+  author_id: string;
+  description: string;
   store_id: string;
-  post: {
-    image: string;
-    title: string;
-    description: string;
-  };
+  isActive: boolean;
   created_at: Date;
   updated_at: Date;
 }

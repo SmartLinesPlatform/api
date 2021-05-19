@@ -35,8 +35,13 @@ class ListStoresService implements IService<IStore[], IListStoresDTO> {
     );
 
     if (!area) {
-      console.log(area);
-      throw new AppError("Customer is not inside any Area", 400);
+      types.push(StoreTypesEnum.PARTNER);
+      types.push(StoreTypesEnum.RESTAURANT);
+      const stores = await this.storeRepository.listAll({
+        types,
+      });
+
+      return stores;
     }
 
     if (partners) {

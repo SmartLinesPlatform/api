@@ -17,10 +17,15 @@ export interface IUpdateAdsRequest {
   thumbnail_url?: string;
 }
 
+export interface IListAllAdsRequest {
+  store_id?: string;
+  all?: boolean;
+}
+
 export default interface IAdsRepository {
   create(data: ICreateAdsRequest): Promise<IAds>;
   update(data: IUpdateAdsRequest): Promise<void>;
   delete(id: string): Promise<void>;
-  listAll(): Promise<IAds[]>;
+  listAll(data: IListAllAdsRequest): Promise<IAds[]>;
   findById(id: string): Promise<IAds | null>;
 }

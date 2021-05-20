@@ -22,8 +22,8 @@ class StoreController implements IController {
       restaurants: Boolean(restaurants),
       current_position: {
         lat: Number(lat),
-        lng: Number(lng)
-      }
+        lng: Number(lng),
+      },
     });
     return res.json(stores);
   }

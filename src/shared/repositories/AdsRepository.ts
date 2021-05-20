@@ -4,6 +4,7 @@ import { getRepository, IRepository } from "fireorm";
 
 import IAdsRepository, {
   ICreateAdsRequest,
+  IListAllAdsRequest,
   IUpdateAdsRequest,
 } from "./interfaces/IAdsRepository";
 
@@ -50,8 +51,28 @@ class AdsRepository implements IAdsRepository {
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
   }
-  async listAll(): Promise<IAds[]> {
-    const ads = await this.repository.find();
+  async listAll({ all, store_id }: IListAllAdsRequest): Promise<IAds[]> {
+    if (all && store_id) {
+      const ads = await this.repository
+        .whereEqualTo("store_id", store_id)
+        .find();
+      return ads;
+    }
+
+    if (!all && store_id) {
+      const ads = await this.repository
+        .whereEqualTo("store_id", store_id)
+        .whereEqualTo("isActive", true)
+        .find();
+      return ads;
+    }
+
+    if (all && !store_id) {
+      const ads = await this.repository.find();
+      return ads;
+    }
+
+    const ads = await this.repository.whereEqualTo("isActive", true).find();
     return ads;
   }
 }

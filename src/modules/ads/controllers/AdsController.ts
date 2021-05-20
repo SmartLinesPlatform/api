@@ -2,6 +2,7 @@ import IController from "@utils/interfaces/IController";
 import { Request, Response } from "express";
 
 import CreateAdsService from "../services/CreateAdsService";
+import ListAdsService from "../services/ListAdsService";
 
 class AdsController implements IController {
   async read(req: Request, res: Response): Promise<Response> {
@@ -9,7 +10,12 @@ class AdsController implements IController {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-    return res.json();
+    const { all, store_id } = req.query;
+    const ads = await ListAdsService.execute({
+      all: Boolean(all),
+      store_id: store_id ? String(store_id) : store_id,
+    });
+    return res.json(ads);
   }
 
   async create(req: Request, res: Response): Promise<Response> {
